@@ -1,0 +1,24 @@
+name: Scheduled Maintenance Check
+
+on:
+  schedule:
+    - cron: '0 2 * * 1'   # Every Monday at 2:00 AM UTC
+  workflow_dispatch:        # Also allow manual trigger for testing
+
+jobs:
+  maintenance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Report current date and time
+        run: |
+          echo "Scheduled workflow running at: $(date)"
+          echo "Running on branch: ${{ github.ref }}"
+
+      - name: Simulate dependency check
+        run: echo "Checking dependencies... all clear!"
+
+      - name: Simulate cleanup task
+        run: echo "Cleaning up temporary files... done!"
